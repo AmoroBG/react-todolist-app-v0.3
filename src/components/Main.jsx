@@ -1,6 +1,6 @@
 import React from "react";
 
-const Main = ({ items, handleCheck }) => {
+const Main = ({ items, handleCheck, handleDelete }) => {
   return (
     <main>
       <ul>
@@ -11,8 +11,18 @@ const Main = ({ items, handleCheck }) => {
               checked={item.checked}
               onChange={() => handleCheck(item.id)}
             />
-            <label htmlFor="item">{item.item}</label>
-            <button>Delete Item</button>
+            <label
+              htmlFor="item"
+              style={
+                item.checked
+                  ? { textDecoration: "line-through", color: "red" }
+                  : null
+              }
+              onDoubleClick={() => handleCheck(item.id)}
+            >
+              {item.item}
+            </label>
+            <button onClick={() => handleDelete(item.id)}>Delete Item</button>
           </li>
         ))}
       </ul>
