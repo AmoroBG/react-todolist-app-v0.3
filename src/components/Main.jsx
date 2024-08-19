@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import ListItem from "./ListItem";
 import AddItem from "./AddItem";
+import SearchItem from "./SearchItem";
 
-const Main = ({ items, setItems, handleCheck, handleDelete }) => {
+const Main = ({
+  items,
+  setItems,
+  handleCheck,
+  handleDelete,
+  search,
+  setSearch,
+}) => {
   const [newItem, setNewItem] = useState("");
 
   const handleSubmit = (e) => {
@@ -22,6 +30,7 @@ const Main = ({ items, setItems, handleCheck, handleDelete }) => {
         newItem={newItem}
         setNewItem={setNewItem}
       />
+      <SearchItem search={search} setSearch={setSearch} />
       {items.length ? (
         <ul>
           {items.map((item) => (

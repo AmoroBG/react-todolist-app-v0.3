@@ -85,7 +85,7 @@ button.delete{
 form{
   display: flex;
   width: 100%;
-  margin: auto;
+  margin: 0.5rem auto;
  text-align: center;
 }
 form label{
@@ -110,4 +110,8 @@ form button{
 }
 form button:hover{
   background-color: mediumblue;
+}
+form.search-item input{
+  border-radius: 5px;
+  padding: 0.4rem 1rem;
 }

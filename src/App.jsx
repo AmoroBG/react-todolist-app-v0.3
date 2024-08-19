@@ -9,6 +9,7 @@ function App() {
     { id: 2, checked: true, item: "Item 2" },
     { id: 3, checked: false, item: "Item 3" },
   ]);
+  const [search, setSearch] = useState("");
 
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
@@ -26,10 +27,14 @@ function App() {
     <div className="App">
       <Header heading="Todo List App" />
       <Main
-        items={items}
+        items={items.filter((item) =>
+          item.item.toLowerCase().includes(search.toLowerCase())
+        )}
         setItems={setItems}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
+        search={search}
+        setSearch={setSearch}
       />
       <Footer heading="Todo List App" />
     </div>
