@@ -1,9 +1,11 @@
 import React from "react";
 
-const Footer = ({ items }) => {
+const Footer = ({heading}) => {
+  const today = new Date();
+  const year = today.getFullYear();
   return (
     <footer>
-      <p>Footer - {items.length}</p>
+      <p>{heading} &copy; {year}</p>
     </footer>
   );
 };

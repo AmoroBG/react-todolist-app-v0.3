@@ -30,7 +30,7 @@ function App() {
         handleCheck={handleCheck}
         handleDelete={handleDelete}
       />
-      <Footer items={items} />
+      <Footer heading="Todo List App" />
     </div>
   );
 }

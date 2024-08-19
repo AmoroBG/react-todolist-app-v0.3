@@ -1,31 +1,33 @@
 import React from "react";
+import ListItem from "./ListItem";
 
 const Main = ({ items, handleCheck, handleDelete }) => {
   return (
     <main>
-      <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            <input
-              type="checkbox"
-              checked={item.checked}
-              onChange={() => handleCheck(item.id)}
+      {items.length ? (
+        <ul>
+          {items.map((item) => (
+            <ListItem
+              key={item.id}
+              item={item}
+              handleCheck={handleCheck}
+              handleDelete={handleDelete}
             />
-            <label
-              htmlFor="item"
-              style={
-                item.checked
-                  ? { textDecoration: "line-through", color: "red" }
-                  : null
-              }
-              onDoubleClick={() => handleCheck(item.id)}
-            >
-              {item.item}
-            </label>
-            <button onClick={() => handleDelete(item.id)}>Delete Item</button>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <p
+          style={{
+            fontWeight: "bold",
+            fontSize: "1.3rem",
+            color: "royalblue",
+            textAlign: "center",
+            margin: "2rem 0",
+          }}
+        >
+          You have no Todos today... Create Todos or enjoy the day with fun!
+        </p>
+      )}
     </main>
   );
 };
