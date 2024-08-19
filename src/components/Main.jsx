@@ -1,13 +1,16 @@
 import React from "react";
 
-const Main = ({ items }) => {
+const Main = ({ items, handleCheck }) => {
   return (
     <main>
       <ul>
         {items.map((item) => (
           <li key={item.id}>
-            <input type="checkbox" name="" id="" />
-            <label htmlFor="">{item.item}</label>
+            <input
+              type="checkbox"
+             
+            />
+            <label htmlFor="item">{item.item}</label>
             <button>Delete Item</button>
           </li>
         ))}

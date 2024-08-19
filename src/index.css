@@ -25,3 +25,52 @@ main{
   flex: 1;
   padding: 1rem;
 }
+ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  width: 100%;
+}
+li{
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  padding:0.5rem;
+  background-color: white;
+  border-radius: 3px;
+}
+
+input[type="checkbox"] {
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  appearance: none;
+  border: 3px solid royalblue;
+  border-radius: 3px;
+}
+
+label{
+  flex: 1;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+label:hover{
+  font-weight: bold;
+  text-decoration: underline;
+}
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: rgba(255, 0, 0, 0.585);
+}
+button:hover{
+  color: red;
+  font-weight: bold;
+}
