@@ -5,24 +5,14 @@ import SearchItem from "./SearchItem";
 
 const Main = ({
   items,
-  setItems,
   handleCheck,
   handleDelete,
   search,
   setSearch,
+  newItem,
+  setNewItem,
+  handleSubmit,
 }) => {
-  const [newItem, setNewItem] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newItem) return;
-    const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
-    const myNewItem = { id, checked: false, item: newItem };
-    setNewItem("");
-    setItems([...items, myNewItem]);
-    console.log(myNewItem);
-  };
-
   return (
     <main>
       <AddItem
