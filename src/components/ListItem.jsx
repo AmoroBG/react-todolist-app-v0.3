@@ -2,7 +2,7 @@ import React from "react";
 
 const ListItem = ({ item, handleCheck, handleDelete }) => {
   return (
-    <li >
+    <li>
       <input
         type="checkbox"
         checked={item.checked}
@@ -17,7 +17,9 @@ const ListItem = ({ item, handleCheck, handleDelete }) => {
       >
         {item.item}
       </label>
-      <button onClick={() => handleDelete(item.id)}>Delete Item</button>
+      <button onClick={() => handleDelete(item.id)} className="delete">
+        Delete Item
+      </button>
     </li>
   );
 };

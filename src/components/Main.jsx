@@ -1,9 +1,16 @@
 import React from "react";
 import ListItem from "./ListItem";
+import AddItem from "./AddItem";
 
 const Main = ({ items, handleCheck, handleDelete }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("added");
+  };
+
   return (
     <main>
+      <AddItem handleSubmit={handleSubmit} />
       {items.length ? (
         <ul>
           {items.map((item) => (
