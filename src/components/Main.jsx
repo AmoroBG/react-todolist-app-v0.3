@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import ListItem from "./ListItem";
 import AddItem from "./AddItem";
 
-const Main = ({ items, handleCheck, handleDelete }) => {
+const Main = ({ items, setItems, handleCheck, handleDelete }) => {
+  const [newItem, setNewItem] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("added");
+    if (!newItem) return;
+    const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
+    const myNewItem = { id, checked: false, item: newItem };
+    setNewItem("");
+    setItems([...items, myNewItem]);
+    console.log(myNewItem);
   };
 
   return (
     <main>
-      <AddItem handleSubmit={handleSubmit} />
+      <AddItem
+        handleSubmit={handleSubmit}
+        newItem={newItem}
+        setNewItem={setNewItem}
+      />
       {items.length ? (
         <ul>
           {items.map((item) => (

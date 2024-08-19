@@ -27,6 +27,7 @@ function App() {
       <Header heading="Todo List App" />
       <Main
         items={items}
+        setItems={setItems}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
       />
