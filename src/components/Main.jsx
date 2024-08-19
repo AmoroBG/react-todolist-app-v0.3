@@ -8,7 +8,8 @@ const Main = ({ items, handleCheck }) => {
           <li key={item.id}>
             <input
               type="checkbox"
-             
+              checked={item.checked}
+              onChange={() => handleCheck(item.id)}
             />
             <label htmlFor="item">{item.item}</label>
             <button>Delete Item</button>
