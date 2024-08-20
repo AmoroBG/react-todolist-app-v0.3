@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import apiRequest from "./apiRequest";
 
 function App() {
   const API_URL = "http://localhost:3500/items";
@@ -30,18 +31,34 @@ function App() {
     fetchItems();
   }, []);
 
-  const handleCheck = (id) => {
+  const handleCheck = async (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(listItems);
-    localStorage.setItem("Daily Todos", JSON.stringify(listItems));
+
+    const checkedItem = listItems.filter((item) => item.id === id);
+
+    const updateOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ checked: checkedItem[0].checked }),
+    };
+    const reqURL = `${API_URL}/${id}`;
+    const results = await apiRequest(reqURL, updateOptions);
+    if (results) setFetchError(results);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
-    localStorage.setItem("Daily Todos", JSON.stringify(listItems));
+
+    const deleteOptions = { method: "DELETE" };
+    const reqURL = `${API_URL}/${id}`;
+    const results = await apiRequest(reqURL, deleteOptions);
+    if (results) setFetchError(results);
   };
 
   const handleSubmit = (e) => {
