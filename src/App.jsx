@@ -1,14 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
 function App() {
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("Daily Todos")) || []
-  );
+  const API_URL = "http://localhost:3500/items";
+
+  const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [newItem, setNewItem] = useState("");
+  const [fetchError, setFetchError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        console.log(response);
+        if (!response.ok) throw Error("Could not receive expected data");
+        const data = await response.json();
+        setItems(data);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchItems();
+  }, []);
 
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
@@ -50,6 +70,8 @@ function App() {
         newItem={newItem}
         setNewItem={setNewItem}
         handleSubmit={handleSubmit}
+        fetchError={fetchError}
+        isLoading={isLoading}
       />
       <Footer heading="Todo List App" />
     </div>
