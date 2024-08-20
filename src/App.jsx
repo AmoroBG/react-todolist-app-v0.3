@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import api from "./todos/api";
 
 function App() {
   const API_URL = "http://localhost:3500/items";
@@ -15,11 +16,8 @@ function App() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch(API_URL);
-        console.log(response);
-        if (!response.ok) throw Error("Could not receive expected data");
-        const data = await response.json();
-        setItems(data);
+        const response = await api.get("/items");
+        setItems(response.data);
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
