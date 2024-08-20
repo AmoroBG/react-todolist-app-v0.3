@@ -1,19 +1,19 @@
 {
   "items": [
     {
-      "id": "1",
-      "checked": true,
-      "item": "Item One"
+      "id": 1,
+      "checked": false,
+      "item": "Task 1"
     },
     {
       "id": 2,
       "checked": false,
-      "item": "Learning"
+      "item": "task 2"
     },
     {
       "id": 3,
       "checked": false,
-      "item": "Praying"
+      "item": "task 3"
     }
   ]
 }
