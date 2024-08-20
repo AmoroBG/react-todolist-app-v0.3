@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import apiRequest from "./apiRequest";
 
 function App() {
   const API_URL = "http://localhost:3500/items";
@@ -36,29 +35,11 @@ function App() {
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(listItems);
-
-    const checkedItem = listItems.filter((item) => item.id === id);
-
-    const updateOptions = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ checked: checkedItem[0].checked }),
-    };
-    const reqURL = `${API_URL}/${id}`;
-    const results = await apiRequest(reqURL, updateOptions);
-    if (results) setFetchError(results);
   };
 
   const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
-
-    const deleteOptions = { method: "DELETE" };
-    const reqURL = `${API_URL}/${id}`;
-    const results = await apiRequest(reqURL, deleteOptions);
-    if (results) setFetchError(results);
   };
 
   const handleSubmit = async (e) => {
@@ -69,16 +50,6 @@ function App() {
     const listItems = [...items, myNewItem];
     setItems(listItems);
     setNewItem("");
-
-    const postOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(myNewItem),
-    };
-    const results = await apiRequest(API_URL, postOptions);
-    if (results) setFetchError(results);
   };
 
   return (
