@@ -4,6 +4,16 @@
       "id": "1",
       "checked": true,
       "item": "Item One"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "item": "Learning"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "item": "Praying"
     }
   ]
 }

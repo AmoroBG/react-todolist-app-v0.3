@@ -61,7 +61,7 @@ function App() {
     if (results) setFetchError(results);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newItem) return;
     const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
@@ -69,7 +69,16 @@ function App() {
     const listItems = [...items, myNewItem];
     setItems(listItems);
     setNewItem("");
-    localStorage.setItem("Daily Todos", JSON.stringify(listItems));
+
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(myNewItem),
+    };
+    const results = await apiRequest(API_URL, postOptions);
+    if (results) setFetchError(results);
   };
 
   return (
