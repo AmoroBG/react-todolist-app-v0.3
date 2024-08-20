@@ -5,8 +5,6 @@ import Main from "./components/Main";
 import api from "./todos/api";
 
 function App() {
-  const API_URL = "http://localhost:3500/items";
-
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
   const [newItem, setNewItem] = useState("");
@@ -36,8 +34,13 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    const listItems = items.filter((item) => item.id !== id);
-    setItems(listItems);
+    try {
+      await api.delete(`/items/${id}`);
+      const listItems = items.filter((item) => item.id !== id);
+      setItems(listItems);
+    } catch (err) {
+      setFetchError(err.message);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -45,9 +48,14 @@ function App() {
     if (!newItem) return;
     const id = items.length ? Number(items[items.length - 1].id) + 1 : 1;
     const myNewItem = { id, checked: false, item: newItem };
-    const listItems = [...items, myNewItem];
-    setItems(listItems);
-    setNewItem("");
+    try {
+      const response = await api.post("/items", myNewItem);
+      const listItems = [...items, response.data];
+      setItems(listItems);
+      setNewItem("");
+    } catch (err) {
+      setFetchError(err.message);
+    }
   };
 
   return (
